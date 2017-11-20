@@ -37,16 +37,16 @@ def searchHoax(form):
 def main():
     # create form
     sform = SearchTask(prefix='sform')
-
+    
     # get response
     data = {}
     if sform.validate_on_submit() and sform.search.data:
         data = searchHoax(sform)
-    
+
     total = 0
     number = 0
     for key, value in data:
-        total += value
+        total += key[1]
         number += 1 
 
     if number==0:
@@ -87,7 +87,7 @@ def tampil():
 def cek():
     # create form
     sform = SearchTask(prefix='sform')
-
+    
     # get response
     data = {}
     if sform.validate_on_submit() and sform.search.data:

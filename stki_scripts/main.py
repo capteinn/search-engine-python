@@ -68,14 +68,15 @@ def findBow(pathfile, pathcorpus):
     list_token = articles.split()
     dic = w4.bow(list_token)
 
-    return w4.sortdic(dic, descending=True)
+    return w4.sortdic(dic, descending=True) 
+
 
 def findHoax(artikel, pathcorpus):
     """
     mencari jarak/similarity antara suatu kalimat inputan dengan sekumpulan file/corpus (artikel HOAX) dalam folder.
     :param pathfile: inputan artikel/kalimat/content
     :param pathcorpus: path tempat folder
-    :return: nama file, jarak terdekat
+    :return: nama file, jarak terdekat, readline/baris pertama dokumen
     """
 
     this_path = os.path.split(__file__)[0]
@@ -83,6 +84,9 @@ def findHoax(artikel, pathcorpus):
 
     # membaca sekaligus pre-processing semua artikel corpus simpan ke dictionary
     articles = {}
+    # artikel origin yang full belum dilakukan pre-processing
+    articles_origin = []
+
     for item in os.listdir(pathcorpus):
         if item.endswith(".txt"):
             with open(pathcorpus + "/" + item, 'r') as file:
@@ -116,9 +120,14 @@ def findHoax(artikel, pathcorpus):
         if key != findname:
             jarak[key] = w5.cosine(matrix_akhir[id_file], vektor)
 
-    # """
-    # Karna hasil euclidean adalah yang terbesar adalah artikel yang paling mendekati/mirip
-    # Maka akan disort dari yang terbesar dari yang terkecil
-    # descendingnya = True
-    # """
-    return w4.sortdic(jarak, descending=True, n=4)
+    data = w4.sortdic(jarak, descending=True, n=4)
+
+    # membaca baris pertama dari setiap hasil dokumen
+    for v in data:
+        for item in os.listdir(pathcorpus):
+            if item.endswith(".txt"):
+                with open(pathcorpus + "/" + item, 'r') as file:
+                    if item == v[0]:
+                        articles_origin.append(file.readline())
+
+    return zip(data, articles_origin)
