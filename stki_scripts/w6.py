@@ -26,3 +26,4 @@ def make_vector(wordQuery, vocab_all):
 
     vector = w4.l2_normalizer(vector)
     return vector
+    

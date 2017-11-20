@@ -120,7 +120,7 @@ def findHoax(artikel, pathcorpus):
         if key != findname:
             jarak[key] = w5.cosine(matrix_akhir[id_file], vektor)
 
-    data = w4.sortdic(jarak, descending=True, n=4)
+    data = w4.sortdic(jarak, descending=True, n=8)
 
     # membaca baris pertama dari setiap hasil dokumen
     for v in data:
