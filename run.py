@@ -28,6 +28,7 @@ def searchBow(form):
 
 def searchHoax(form):
     keyword = form.keyword.data
+	
     path_corpus = "./text files/"
     res = findHoax(keyword, path_corpus)
     # res = {"title 1":0.3, "title 2":0.5, "title 3":1.3} # change the value here
@@ -53,7 +54,7 @@ def main():
         prosentase = 0
     else:
         prosentase = round(total/number, 2)
-
+	
     # render HTML
     return render_template('index.html', sform = sform, data = data, prosentase = prosentase)
 
