@@ -272,6 +272,43 @@
 		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	  })();
 	</script>
-
+	
+	<script type="text/javascript">
+        var colors = ['#b71c1c', '#c62828', '#d32f2f', '#e53935', '#f44336', '#ef5350', '#e57373', '#ef9a9a', '#ffcdd2', '#ffebee'];
+        var item = [
+					{% for v in data %}
+					'{{ v[0][0] }}',
+					{% endfor %}				
+				];
+        
+        //diagram batang
+        $('#diagram_batang').highcharts({
+            chart: {
+                type: 'bar',
+            },
+            title: {
+                text: 'Kemiripan dengan Artikel HOAX',
+            },
+            xAxis: {
+                categories: item,
+                allowDecimals: false
+            },
+            yAxis: {
+                allowDecimals: false
+            },
+            series: [
+            {
+                data: [
+					{% for v in data %}
+						{y: {{ v[0][1] }}, name: '{{ v[0][0] }}', color: colors[3]},
+					{% endfor %}
+                ]
+            },
+            ],
+            credits: {
+                enabled: false
+            },
+        });     
+    </script>
   </body>
 </html>

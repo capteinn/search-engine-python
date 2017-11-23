@@ -120,14 +120,15 @@ def findHoax(artikel, pathcorpus):
         if key != findname:
             jarak[key] = w5.cosine(matrix_akhir[id_file], vektor)
 
-    data = w4.sortdic(jarak, descending=True, n=8)
+    data = w4.sortdic(jarak, descending=True, n=4)
 
     # membaca baris pertama dari setiap hasil dokumen
     for v in data:
         for item in os.listdir(pathcorpus):
             if item.endswith(".txt"):
                 with open(pathcorpus + "/" + item, 'r') as file:
-                    if item == v[0]:
+                    # apabila setiap nama_file == v[0] yakni nama file yang ada di data maka ditampilkan readline-nya
+					if item == v[0]:
                         articles_origin.append(file.readline())
 
     return zip(data, articles_origin)
