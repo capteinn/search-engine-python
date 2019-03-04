@@ -1,0 +1,22 @@
+1. masuk ke directory
+2. activekan enviroment
+masuk folder env
+online_store_env\Script\activate
+3. cari path yang ada manage.py
+python manage.py runserver
+python manage.py runserver 7000 (misal mau ganti port selain 8000)
+
+git
+git remote -v
+git remote add origin http
+git remote -v
+git status
+git add .
+git status
+git commit -m "initial commit"
+git status
+git push origin master
+
+
+
+
