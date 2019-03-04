@@ -63,13 +63,21 @@ def findBow(pathfile, pathcorpus):
     pathfile = os.path.join(this_path, pathcorpus, pathfile)
 
     with open(pathfile, 'r') as file:
-        articles = w3.prepro_base(file.read())    # representasi bow
+        articles = w3.prepro_base(file.readline())    # representasi bow
 
     list_token = articles.split()
     dic = w4.bow(list_token)
 
     return w4.sortdic(dic, descending=True) 
 
+path_uas = "./uas files/hasil uas prepro.txt"
+with open(path_uas, 'r') as file:
+    articles = file.read()
+list_token = articles.split()
+dic = w4.bow(list_token)
+sortdic = w4.sortdic(dic, descending=True)
+for v in sortdic:
+    print str(v[0]) + " : " + str(v[1])
 
 def findHoax(artikel, pathcorpus):
     """
@@ -128,7 +136,7 @@ def findHoax(artikel, pathcorpus):
             if item.endswith(".txt"):
                 with open(pathcorpus + "/" + item, 'r') as file:
                     # apabila setiap nama_file == v[0] yakni nama file yang ada di data maka ditampilkan readline-nya
-					if item == v[0]:
-                        articles_origin.append(file.readline())
+			if item == v[0]:
+				articles_origin.append(file.readline())
 
     return zip(data, articles_origin)

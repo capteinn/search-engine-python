@@ -56,3 +56,10 @@ def prepro_base(string):
     cleantext = [fold(item) for item in token]
     cleantext = [remove_punctuation(item) for item in cleantext]
     return " ".join(cleantext)
+
+# path_uas = "./uas files/jawaban siswa.txt"
+
+# with open(path_uas, 'r') as file:
+# 	articles = preprotext(file.read())
+
+# print articles
